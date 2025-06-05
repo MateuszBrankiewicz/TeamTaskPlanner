@@ -1,0 +1,7 @@
+@use "variables" as *;
+button {
+  background-color: $primary-100;
+}
+button:hover {
+  background-color: lighten($primary-100,30%);
+}
