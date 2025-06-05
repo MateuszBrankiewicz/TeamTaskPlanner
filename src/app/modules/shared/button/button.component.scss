@@ -1,7 +1,19 @@
 @use "variables" as *;
 button {
   background-color: $primary-100;
+  border: none;
+
+  border-radius: 10px;
+}
+.small{
+  padding: 2% 5%;
+}
+.medium{
+  padding: 2% 15%;
+}
+.large{
+  padding: 2% 25%;
 }
 button:hover {
-  background-color: lighten($primary-100,30%);
+  background-color: $primary-200;
 }

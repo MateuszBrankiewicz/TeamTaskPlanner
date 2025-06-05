@@ -9,4 +9,7 @@ import {ButtonComponent} from '../../../shared/button/button.component';
 })
 export class LoginPageComponent {
 
+  handleLogin() {
+
+  }
 }
