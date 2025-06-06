@@ -15,7 +15,12 @@ export class LoginPageComponent {
   password: new FormControl('', Validators.required)
 });
   handleLogin() {
-  console.log(this.loginForm.value);
+    if(this.loginForm.valid)
+    {
+      console.log(this.loginForm.value);
+    }else{
+      this.loginForm.markAllAsTouched();
+    }
   }
   get emailControl(): FormControl {
     return this.loginForm.get('email') as FormControl;

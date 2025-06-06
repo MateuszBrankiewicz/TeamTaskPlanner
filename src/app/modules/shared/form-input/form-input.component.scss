@@ -33,3 +33,9 @@
 .large{
   padding: 1rem 3rem;
 }
+.error-message{
+  color: $text-error;
+  font-weight: bold;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}

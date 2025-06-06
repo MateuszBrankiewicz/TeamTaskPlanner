@@ -1,11 +1,13 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-form-input',
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './form-input.component.html',
   styleUrl: './form-input.component.scss'
@@ -24,4 +26,7 @@ export class FormInputComponent {
   label: string ="";
   @Input()
   id: string = crypto.randomUUID();
+  shouldShowErrors(): boolean {
+    return this.control.invalid&& this.control.invalid &&(this.control.dirty || this.control.touched);
+  }
 }

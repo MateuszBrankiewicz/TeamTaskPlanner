@@ -4,8 +4,8 @@
   <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
     <h2>Login Page</h2>
     <div class="form-content">
-    <app-form-input type="email" label="Podaj email" [control]="emailControl" placeholder="Email"></app-form-input>
-    <app-form-input type="password" label="Podaj haslo" [control]="passwordControl" size="large" placeholder="Haslo"></app-form-input>
+    <app-form-input type="email" label="Email" [control]="emailControl" placeholder="Email"></app-form-input>
+    <app-form-input type="password" label="Haslo" [control]="passwordControl" size="large" placeholder="Haslo"></app-form-input>
     <app-button type="submit" text="Zaloguj" ></app-button>
     </div>
   </form>
