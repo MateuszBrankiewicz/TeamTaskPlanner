@@ -1,8 +1,12 @@
 import {Component, Input} from '@angular/core';
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-form-input',
-  imports: [],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './form-input.component.html',
   styleUrl: './form-input.component.scss'
 })
@@ -13,7 +17,11 @@ export class FormInputComponent {
   @Input()
   type: "text" | "password" | "email" | "number" = "text";
   @Input()
-  value : string ="";
+  control! : FormControl;
   @Input()
   size: 'small' | 'medium' | 'large' = 'large';
+  @Input()
+  label: string ="";
+  @Input()
+  id: string = crypto.randomUUID();
 }

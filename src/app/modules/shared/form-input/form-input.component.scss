@@ -1,0 +1,35 @@
+@use "variables" as *;
+
+.form-label {
+  color: $text-100;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+  align-self: flex-start;
+
+}
+
+.form-input {
+  background-color: $bg-200;
+  border: 1px solid $accent-200;
+  color: $text-100;
+  border-radius: 0.5rem;
+  width: 100%;
+
+}
+.div-label{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.small{
+  padding: 0.5rem 1rem;
+}
+.medium{
+  padding: 1rem 1.5rem;
+}
+.large{
+  padding: 1rem 3rem;
+}

@@ -4,16 +4,24 @@ button {
   border: none;
 
   border-radius: 10px;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: lighten($accent-100, 10%);
+  }
+  &:disabled {
+    background-color: $bg-300;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 }
 .small{
-  padding: 2% 5%;
+  padding: 0.5rem 1rem;
 }
 .medium{
-  padding: 2% 15%;
+  padding: 1rem 5rem;
 }
 .large{
-  padding: 2% 25%;
+  padding: 1rem 5rem;
 }
-button:hover {
-  background-color: $primary-200;
-}
+
+

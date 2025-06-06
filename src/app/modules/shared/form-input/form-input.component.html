@@ -1,1 +1,11 @@
-<input [type]="type" [class]="size" [placeholder]="placeholder" [value]="value">
+<div class="div-label">
+<label [for]="id" class="form-label">{{ label }}</label>
+<input
+  [id]="id"
+  [type]="type"
+  [class]="size"
+  [placeholder]="placeholder"
+  [formControl]="control"
+  class="form-input"
+/>
+</div>
