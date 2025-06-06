@@ -26,7 +26,6 @@ export class FormInputComponent {
   label: string ="";
   @Input()
   id: string = crypto.randomUUID();
-  shouldShowErrors(): boolean {
-    return this.control.invalid&& this.control.invalid &&(this.control.dirty || this.control.touched);
-  }
+
+  @Input() submitted!: boolean;
 }

@@ -1,0 +1,15 @@
+<main>
+<div class="form-content">
+  <h2>Zarejestruj się</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
+    <app-form-input type="email" size="large" [submitted] =formSubitted placeholder="Email" [control]="EmailControl" label="Email"></app-form-input>
+    <app-form-input type="password" [submitted] =formSubitted size="large" placeholder="Hasło" [control]="passwordControl" label="Hasło"></app-form-input>
+    <app-form-input type="password" [submitted] =formSubitted size="large" placeholder="Powtórz hasło" [control]="passwordConfirmationControl" label="Powtórz hasło"></app-form-input>
+    <p class="error-message" *ngIf="!getPasswordEquals">Haslo musi byc takie samo</p>
+    <app-button type="submit" text="Zarejestruj się"></app-button>
+
+  </form>
+  <span class="link-to-login">Posiadasz już konto? <a routerLink="login" >Zaloguj się</a></span>
+</div>
+
+</main>

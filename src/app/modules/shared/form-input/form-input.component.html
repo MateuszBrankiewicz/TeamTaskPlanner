@@ -8,7 +8,8 @@
   [formControl]="control"
   class="form-input"
 />
-  <div class="error-message" *ngIf="shouldShowErrors()">
+  <div class="error-message" *ngIf="submitted">
     <div *ngIf="control.errors?.['required']"> {{label}} jest wymagany</div>
+    <div *ngIf="control.errors?.['email']">Niepoprawny email</div>
   </div>
 </div>

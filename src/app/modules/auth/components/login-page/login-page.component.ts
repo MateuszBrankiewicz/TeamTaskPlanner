@@ -14,10 +14,13 @@ export class LoginPageComponent {
   email : new FormControl('', [Validators.required, Validators.email]),
   password: new FormControl('', Validators.required)
 });
+  formSubitted = false;
   handleLogin() {
+    this.formSubitted = true;
     if(this.loginForm.valid)
     {
       console.log(this.loginForm.value);
+
     }else{
       this.loginForm.markAllAsTouched();
     }

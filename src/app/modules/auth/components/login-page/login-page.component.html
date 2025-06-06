@@ -2,10 +2,10 @@
 
 
   <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
-    <h2>Login Page</h2>
+    <h2>Zaloguj się</h2>
     <div class="form-content">
-    <app-form-input type="email" label="Email" [control]="emailControl" placeholder="Email"></app-form-input>
-    <app-form-input type="password" label="Haslo" [control]="passwordControl" size="large" placeholder="Haslo"></app-form-input>
+    <app-form-input type="email" label="Email" [control]="emailControl" placeholder="Email" [submitted] =formSubitted ></app-form-input>
+    <app-form-input type="password" label="Haslo" [control]="passwordControl" size="large" [submitted] =formSubitted placeholder="Haslo"></app-form-input>
     <app-button type="submit" text="Zaloguj" ></app-button>
     </div>
   </form>

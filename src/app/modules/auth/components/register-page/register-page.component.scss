@@ -1,0 +1,31 @@
+@use "variables";
+@use "mixins";
+.form-content{
+  max-width: 400px;
+  width: 100%;
+  @include mixins.flex-column-center;
+  background-color: variables.$bg-300;
+  padding: 3rem;
+  border-radius: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+main{
+  @include mixins.flex-center;
+  min-height: 100vh;
+}
+
+h2{
+  font-size: 2rem;
+  color: variables.$text-100
+
+}
+form{
+  @include mixins.flex-column-center
+}
+a{
+  text-decoration: none;
+  color: variables.$primary-100;
+}
+.link-to-login{
+  color: variables.$text-100;
+}
