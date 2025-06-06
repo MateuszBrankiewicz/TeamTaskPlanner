@@ -4,6 +4,7 @@ import {ButtonComponent} from '../../../shared/button/button.component';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import {AuthServiceService} from '../../service/auth-service.service';
 
 @Component({
   selector: 'app-register-page',
@@ -18,6 +19,8 @@ import {RouterLink} from '@angular/router';
   styleUrl: './register-page.component.scss'
 })
 export class RegisterPageComponent {
+  constructor(  private authService : AuthServiceService) {
+  }
   registerForm: FormGroup = new FormGroup({
     email : new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
@@ -31,12 +34,14 @@ export class RegisterPageComponent {
       this.registerForm.markAllAsTouched();
       return;
     }
-    if( !(this.passwordControl === this.passwordConfirmationControl)){
+    if( !(this.registerForm.controls['passwordConfirmation'].value === this.registerForm.controls['password'].value)) {
         this.passwordEqals = false;
         return;
     }
     this.passwordEqals = true;
-    console.log(this.registerForm.value);
+    const email = this.registerForm.controls['email'].value;
+    const password = this.registerForm.controls['password'].value;
+  this.authService.registerUser({email,password})
   }
 
     get EmailControl() : FormControl {
