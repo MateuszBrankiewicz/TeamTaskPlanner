@@ -3,7 +3,7 @@ import {FormInputComponent} from '../../../shared/form-input/form-input.componen
 import {ButtonComponent} from '../../../shared/button/button.component';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {AuthServiceService} from '../../service/auth-service.service';
 
 @Component({
@@ -19,7 +19,7 @@ import {AuthServiceService} from '../../service/auth-service.service';
   styleUrl: './register-page.component.scss'
 })
 export class RegisterPageComponent {
-  constructor(  private authService : AuthServiceService) {
+  constructor(  private authService : AuthServiceService, private router: Router) {
   }
   registerForm: FormGroup = new FormGroup({
     email : new FormControl('', [Validators.required, Validators.email]),
@@ -41,7 +41,15 @@ export class RegisterPageComponent {
     this.passwordEqals = true;
     const email = this.registerForm.controls['email'].value;
     const password = this.registerForm.controls['password'].value;
-  this.authService.registerUser({email,password})
+    this.authService.registerUser({email, password}).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.router.navigate(['/login']);
+      },
+      error: (error)=>{
+        console.log(error);
+      }
+    })
   }
 
     get EmailControl() : FormControl {

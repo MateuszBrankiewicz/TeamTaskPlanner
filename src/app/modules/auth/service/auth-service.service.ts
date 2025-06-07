@@ -1,5 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {tap} from 'rxjs';
 
 interface User {
   email: string;
@@ -13,8 +14,13 @@ export class AuthServiceService {
   private httpClient = inject(HttpClient);
   constructor() { }
   registerUser(user : User){
-    this.httpClient.post<User>('http://localhost:3000/users/register',user).subscribe(user => {
-      console.log(user);
-    })
+    return this.httpClient.post<User>('http://localhost:3000/users/register',user)
+  }
+  loginUser(user: User){
+    return this.httpClient.post<User>('http://localhost:3000/users/login',user,{withCredentials:true}).pipe(
+      tap(res=>{
+        console.log(res);
+      })
+    )
   }
 }
