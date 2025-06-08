@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TeamTaskPlanner")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba2f8da8f38492465310cd5710e133ca0f3ff06d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d31476480085cc457047bd4d7298ebd2f0d2f691")]
 [assembly: System.Reflection.AssemblyProductAttribute("TeamTaskPlanner")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TeamTaskPlanner")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
