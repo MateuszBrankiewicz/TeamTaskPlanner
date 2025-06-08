@@ -8,7 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+  var services = scope.ServiceProvider;
+  try
+  {
+   var context = services.GetRequiredService<AppDbContext>();
+   DbInitializer.Initialize(context);
+  }
+  catch (Exception e)
+  {
+    Console.WriteLine(e);
+    throw;
+  }
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
