@@ -1,0 +1,4 @@
+# Local secrets
+appsettings.Development.json
+/bin/
+**/obj/**
