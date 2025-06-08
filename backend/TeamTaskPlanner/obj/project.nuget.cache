@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "idbIVf3sHm0=",
+  "success": true,
+  "projectFilePath": "/home/mateusz/ProjektAngular/Admin-Dashboard/backend/TeamTaskPlanner/TeamTaskPlanner.csproj",
+  "expectedPackageFiles": [
+    "/home/mateusz/.nuget/packages/microsoft.aspnetcore.openapi/9.0.5/microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",
+    "/home/mateusz/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}

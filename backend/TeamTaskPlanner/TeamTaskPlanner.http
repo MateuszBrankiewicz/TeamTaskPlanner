@@ -1,0 +1,6 @@
+@TeamTaskPlanner_HostAddress = http://localhost:5078
+
+GET {{TeamTaskPlanner_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
