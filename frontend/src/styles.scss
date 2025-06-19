@@ -1,9 +1,130 @@
 /* You can add global styles to this file, and also import other style files */
 @use "variables" as *;
-body{
+@use '@angular/material' as mat;
+
+@mixin apply-theme($primary-100, $primary-200, $primary-300, $accent-100, $accent-200, $text-100, $text-200, $bg-100, $bg-200, $bg-300) {
+  // Twoje zmienne CSS
+  --primary-100: #{$primary-100};
+  --primary-200: #{$primary-200};
+  --primary-300: #{$primary-300};
+  --accent-100: #{$accent-100};
+  --accent-200: #{$accent-200};
+  --text-100: #{$text-100};
+  --text-200: #{$text-200};
+  --bg-100: #{$bg-100};
+  --bg-200: #{$bg-200};
+  --bg-300: #{$bg-300};
+
+  // Mapowanie na Angular Material
+  --mdc-theme-primary: #{$primary-100};
+  --mdc-theme-secondary: #{$accent-100};
+  --mdc-theme-surface: #{$bg-100};
+  --mdc-theme-background: #{$bg-100};
+  --mdc-theme-on-primary: #{if(lightness($primary-100) > 50%, $text-100, $bg-100)};
+  --mdc-theme-on-secondary: #{if(lightness($accent-100) > 50%, $text-100, $bg-100)};
+  --mdc-theme-on-surface: #{$text-100};
+  --mdc-theme-on-background: #{$text-100};
+
+  // Komponenty Material - rozszerzona lista
+  --mat-app-background-color: #{$bg-100};
+  --mat-app-text-color: #{$text-100};
+
+  // Buttons
+  --mdc-filled-button-container-color: #{$primary-100};
+  --mdc-filled-button-label-text-color: #{if(lightness($primary-100) > 50%, $text-100, $bg-100)};
+  --mdc-outlined-button-outline-color: #{$primary-100};
+  --mdc-outlined-button-label-text-color: #{$primary-100};
+  --mdc-text-button-label-text-color: #{$primary-100};
+
+  // Cards
+  --mdc-elevated-card-container-color: #{$bg-100};
+  --mdc-outlined-card-container-color: #{$bg-100};
+  --mdc-outlined-card-outline-color: #{$bg-300};
+
+  // Form fields
+  --mdc-filled-text-field-container-color: #{$bg-200};
+  --mdc-filled-text-field-focus-active-indicator-color: #{$primary-100};
+  --mdc-filled-text-field-label-text-color: #{$text-200};
+  --mdc-filled-text-field-input-text-color: #{$text-100};
+  --mdc-outlined-text-field-outline-color: #{$text-200};
+  --mdc-outlined-text-field-focus-outline-color: #{$primary-100};
+  --mdc-outlined-text-field-label-text-color: #{$text-200};
+  --mdc-outlined-text-field-input-text-color: #{$text-100};
+
+  // Toolbar
+  --mat-toolbar-container-background-color: #{$bg-200};
+  --mat-toolbar-container-text-color: #{$text-100};
+
+  // Sidenav
+  --mat-sidenav-container-background-color: #{$bg-100};
+  --mat-sidenav-content-background-color: #{$bg-100};
+  --mat-sidenav-scrim-color: rgba(#{red($bg-300)}, #{green($bg-300)}, #{blue($bg-300)}, 0.6);
+
+  // Lists
+  --mdc-list-list-item-container-color: #{$bg-100};
+  --mdc-list-list-item-label-text-color: #{$text-100};
+  --mdc-list-list-item-selected-container-color: #{$primary-300};
+
+  // Tabs
+  --mat-tab-header-background-color: #{$bg-100};
+  --mdc-tab-text-label-color-default: #{$text-200};
+  --mdc-tab-text-label-color-active: #{$primary-100};
+
+  // Dialog
+  --mdc-dialog-container-color: #{$bg-100};
+  --mdc-dialog-subhead-color: #{$text-100};
+  --mdc-dialog-supporting-text-color: #{$text-200};
+
+  // Divider
+  --mat-divider-color: #{$bg-300};
+}
+
+// Aplikacja motywów
+.light-theme {
+  @include apply-theme(
+    $light-primary-100, $light-primary-200, $light-primary-300,
+    $light-accent-100, $light-accent-200,
+    $light-text-100, $light-text-200,
+    $light-bg-100, $light-bg-200, $light-bg-300
+  );
+}
+
+.dark-theme {
+  @include apply-theme(
+    $dark-primary-100, $dark-primary-200, $dark-primary-300,
+    $dark-accent-100, $dark-accent-200,
+    $dark-text-100, $dark-text-200,
+    $dark-bg-100, $dark-bg-200, $dark-bg-300
+  );
+}
+
+// Domyślny motyw (możesz zmienić na dark-theme jeśli chcesz)
+:root {
+  @include apply-theme(
+    $light-primary-100, $light-primary-200, $light-primary-300,
+    $light-accent-100, $light-accent-200,
+    $light-text-100, $light-text-200,
+    $light-bg-100, $light-bg-200, $light-bg-300
+  );
+}
+
+// Globalne style
+html {
+  color-scheme: light dark;
+  height: 100%;
+}
+
+body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: $bg-100;
   min-width: 100vw;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  // Użyj CSS custom property zamiast zmiennej SCSS
+  background-color: var(--bg-100);
+  color: var(--text-100);
 }
+
+// Angular Material theme configuration
+@include mat.core();
+

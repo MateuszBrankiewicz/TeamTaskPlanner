@@ -1,0 +1,85 @@
+// _material-theme.scss
+@mixin material-components-theme {
+  // Podstawowe komponenty
+  --mdc-checkbox-selected-checkmark-color: var(--bg-100);
+  --mdc-checkbox-selected-focus-icon-color: var(--primary-100);
+  --mdc-checkbox-unselected-focus-icon-color: var(--text-200);
+
+  // Radio buttons
+  --mdc-radio-selected-focus-icon-color: var(--primary-100);
+  --mdc-radio-unselected-focus-icon-color: var(--text-200);
+
+  // Slider
+  --mdc-slider-active-track-color: var(--primary-100);
+  --mdc-slider-inactive-track-color: var(--bg-300);
+  --mdc-slider-handle-color: var(--primary-100);
+
+  // Switch
+  --mdc-switch-selected-track-color: var(--primary-100);
+  --mdc-switch-selected-handle-color: var(--bg-100);
+  --mdc-switch-unselected-track-color: var(--bg-300);
+  --mdc-switch-unselected-handle-color: var(--text-200);
+
+  // Tabs
+  --mdc-tab-text-label-color-default: var(--text-200);
+  --mdc-tab-text-label-color-active: var(--primary-100);
+  --mat-tab-header-background-color: var(--bg-100);
+  --mdc-secondary-navigation-tab-container-color: var(--bg-100);
+
+  // Menu & Lists
+  --mdc-list-list-item-container-color: var(--bg-100);
+  --mdc-list-list-item-label-text-color: var(--text-100);
+  --mdc-list-list-item-selected-container-color: var(--primary-300);
+  --mdc-list-list-item-hover-state-layer-color: var(--primary-200);
+
+  // Snackbar
+  --mdc-snackbar-container-color: var(--bg-200);
+  --mdc-snackbar-supporting-text-color: var(--text-100);
+  --mdc-snackbar-action-label-text-color: var(--accent-100);
+
+  // Dialog
+  --mdc-dialog-container-color: var(--bg-100);
+  --mdc-dialog-subhead-color: var(--text-100);
+  --mdc-dialog-supporting-text-color: var(--text-200);
+
+  // Progress indicators
+  --mdc-linear-progress-active-indicator-color: var(--primary-100);
+  --mdc-linear-progress-track-color: var(--bg-300);
+  --mdc-circular-progress-active-indicator-color: var(--primary-100);
+
+  // Chips
+  --mdc-chip-container-color: var(--bg-200);
+  --mdc-chip-label-text-color: var(--text-100);
+  --mdc-chip-selected-background-color: var(--primary-100);
+  --mdc-chip-selected-label-text-color: var(--bg-100);
+
+  // Navigation
+  --mdc-navigation-drawer-container-color: var(--bg-200);
+  --mat-sidenav-content-background-color: var(--bg-100);
+  --mat-sidenav-container-background-color: var(--bg-100);
+
+  // Expansion Panel
+  --mat-expansion-container-background-color: var(--bg-100);
+  --mat-expansion-header-text-color: var(--text-100);
+  --mat-expansion-header-description-color: var(--text-200);
+
+  // Stepper
+  --mat-stepper-container-color: var(--bg-100);
+  --mat-stepper-header-label-text-color: var(--text-100);
+  --mat-stepper-line-color: var(--bg-300);
+
+  // Paginator
+  --mat-paginator-container-background-color: var(--bg-100);
+  --mat-paginator-container-text-color: var(--text-100);
+
+  // Sort
+  --mat-sort-arrow-color: var(--text-200);
+
+  // Divider
+  --mat-divider-color: var(--bg-300);
+}
+
+// Użycie w głównym pliku
+.light-theme, .dark-theme {
+  @include material-components-theme;
+}

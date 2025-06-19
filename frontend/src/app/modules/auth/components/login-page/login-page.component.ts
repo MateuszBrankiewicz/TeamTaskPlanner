@@ -6,10 +6,13 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthServiceService} from '../../service/auth-service.service';
 import { firstValueFrom } from 'rxjs';
-
+import { MatCard, MatCardActions, MatCardContent, MatCardHeader } from '@angular/material/card';
+import {  MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-login-page',
-  imports: [ButtonComponent, FormInputComponent, ReactiveFormsModule],
+  imports: [ ReactiveFormsModule, MatCard, MatCardActions, MatCardHeader, MatCardContent,MatInputModule, MatFormFieldModule,MatButtonModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
