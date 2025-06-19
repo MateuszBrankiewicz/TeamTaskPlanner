@@ -5,6 +5,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthServiceService} from '../../service/auth-service.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -20,22 +21,25 @@ export class LoginPageComponent {
   constructor(private authService: AuthServiceService, private router: Router) {
   }
   formSubitted = false;
-  handleLogin() {
+  showError = false;
+ async  handleLogin() {
     this.formSubitted = true;
     if(this.loginForm.valid)
     {
       if(this.loginForm.value.email && this.loginForm.value.password) {
         const email = this.loginForm.value.email;
         const password = this.loginForm.value.password;
-        this.authService.loginUser({email, password}).subscribe({
-          next: (result) => {
-            console.log(result);
-            this.router.navigate(['/']);
-          },
-          error: (error) => {
-            console.log(error);
-          }
-        })
+        try{
+          const response = firstValueFrom(
+            this.authService.loginUser({email,password})
+          )
+          console.log(response);
+          await this.router.navigate(['/'])
+        }
+        catch(err){
+          this.showError = true;
+          console.log(err);
+        }
       }
     }else{
       this.loginForm.markAllAsTouched();

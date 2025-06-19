@@ -5,6 +5,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {NgIf} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import {AuthServiceService} from '../../service/auth-service.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-register-page',
@@ -12,7 +13,6 @@ import {AuthServiceService} from '../../service/auth-service.service';
     FormInputComponent,
     ButtonComponent,
     ReactiveFormsModule,
-    NgIf,
     RouterLink
   ],
   templateUrl: './register-page.component.html',
@@ -28,7 +28,9 @@ export class RegisterPageComponent {
   });
   formSubitted = false;
   passwordEqals : boolean = true;
-  handleSubmit() {
+  showError = false;
+  emailTaken = false;
+  async handleSubmit() {
     this.formSubitted = true;
     if (!this.registerForm.valid) {
       this.registerForm.markAllAsTouched();
@@ -41,17 +43,29 @@ export class RegisterPageComponent {
     this.passwordEqals = true;
     const email = this.registerForm.controls['email'].value;
     const password = this.registerForm.controls['password'].value;
-    this.authService.registerUser({email, password}).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.router.navigate(['/login']);
-      },
-      error: (error)=>{
-        console.log(error);
-      }
-    })
-  }
+    try{
+      const response = await firstValueFrom(
+        this.authService.registerUser({email,password})
+      )
+      console.log(response);
+      await this.router.navigate(['/login']);
 
+    }catch(err:any){
+      if(err.status === 400){
+        const errorData = err.error;
+
+      if (errorData.errorCode === 'EMAIL_ALREADY_EXISTS') {
+        this.registerForm.get('email')?.setErrors({
+          emailTaken: true
+        });
+        this.emailTaken =true;
+      }
+      else{
+      this.showError = true;
+      }
+    }
+  }
+  }
     get EmailControl() : FormControl {
     return this.registerForm.get('email') as FormControl;
   }
