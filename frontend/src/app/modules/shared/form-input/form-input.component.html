@@ -1,15 +1,11 @@
-<div class="div-label">
-<label [for]="id" class="form-label">{{ label }}</label>
-<input
-  [id]="id"
-  [type]="type"
-  [class]="size"
-  [placeholder]="placeholder"
-  [formControl]="control"
-  class="form-input"
-/>
-  <div class="error-message" *ngIf="submitted">
-    <div *ngIf="control.errors?.['required']"> {{label}} jest wymagany</div>
-    <div *ngIf="control.errors?.['email']">Niepoprawny email</div>
-  </div>
-</div>
+
+ <mat-form-field class="input-field" [class]="size">
+          <mat-label>{{label}}</mat-label>
+          <input [type]="type" matInput [formControl]="control" placeholder="placeholder">
+          @if (control.hasError('email') && !control.hasError('required')){
+              <mat-error>Podaj poprawny adres email.</mat-error>
+          }
+          @if(control.hasError('required')){
+            <mat-error>Email jest <strong>wymagany</strong></mat-error>
+          }
+  </mat-form-field>

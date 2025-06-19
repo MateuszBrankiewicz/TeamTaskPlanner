@@ -1,3 +1,5 @@
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import {Component, Input} from '@angular/core';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
@@ -7,7 +9,9 @@ import {NgIf} from '@angular/common';
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    NgIf
+
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './form-input.component.html',
   styleUrl: './form-input.component.scss'

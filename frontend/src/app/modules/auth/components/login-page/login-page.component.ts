@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-login-page',
-  imports: [ ReactiveFormsModule, MatCard, MatCardActions, MatCardHeader, MatCardContent,MatInputModule, MatFormFieldModule,MatButtonModule],
+  imports: [ReactiveFormsModule, MatCard, FormInputComponent, MatCardHeader, MatCardContent, MatInputModule, MatFormFieldModule, MatButtonModule, FormInputComponent],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })

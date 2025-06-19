@@ -1,41 +1,53 @@
 @use "variables" as *;
 
-.form-label {
-  color: $text-100;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 0.5rem;
-  align-self: flex-start;
-
-}
-
-.form-input {
-  background-color: $bg-200;
-  border: 1px solid $accent-200;
-  color: $text-100;
-  border-radius: 0.5rem;
+.input-field {
   width: 100%;
 
-}
-.div-label{
+  ::ng-deep {
+    .mat-mdc-form-field-flex {
+      background-color: var(--bg-200);
+      border-radius: 12px;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.small{
-  padding: 0.5rem 1rem;
-}
-.medium{
-  padding: 1rem 1.5rem;
-}
-.large{
-  padding: 1rem 3rem;
-}
-.error-message{
-  color: $text-error;
-  font-weight: bold;
-  align-self: flex-start;
-  margin-top: 0.5rem;
+      &:hover {
+        background-color: var(--bg-300);
+      }
+    }
+
+    .mat-mdc-form-field-focus-overlay {
+      background-color: var(--primary-100);
+      opacity: 0.05;
+    }
+
+    &.mat-focused .mat-mdc-form-field-flex {
+      border-color: var(--primary-100);
+      background-color: var(--bg-100);
+    }
+
+    .mat-mdc-floating-label {
+      color: var(--text-200);
+      font-weight: 500;
+    }
+
+    .mat-mdc-input-element {
+      color: var(--text-100);
+      font-size: 1rem;
+
+      &::placeholder {
+        color: var(--text-200);
+        opacity: 0.7;
+      }
+    }
+
+    .mat-mdc-form-field-underline {
+      display: none;
+    }
+
+    .mat-mdc-form-field-error {
+      color: #f44336;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+  }
 }

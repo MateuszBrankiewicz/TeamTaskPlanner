@@ -3,27 +3,8 @@
     <mat-card-header><h2>Zaloguj się</h2></mat-card-header>
     <mat-card-content>
       <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
-        <mat-form-field class="input-field">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput [formControl]="emailControl" placeholder="uzytkownik@email.com">
-          @if (emailControl.hasError('email') && !emailControl.hasError('required')){
-              <mat-error>Podaj poprawny adres email.</mat-error>
-          }
-          @if(emailControl.hasError('required')){
-            <mat-error>Email jest <strong>wymagany</strong></mat-error>
-          }
-        </mat-form-field>
-
-        <!-- Dodaj pole hasła -->
-        <mat-form-field class="input-field">
-          <mat-label>Hasło</mat-label>
-          <input type="password" matInput [formControl]="passwordControl" placeholder="Hasło">
-          @if(passwordControl.hasError('required')){
-            <mat-error>Hasło jest <strong>wymagane</strong></mat-error>
-          }
-        </mat-form-field>
-
-        <!-- Przycisk submit WEWNĄTRZ formularza -->
+        <app-form-input type="email" label="Email" [control]="emailControl"  [submitted] =formSubitted ></app-form-input>
+        <app-form-input type="password" label="Haslo" [control]="passwordControl" size="large" [submitted] =formSubitted ></app-form-input>
         <button mat-raised-button color="primary" type="submit">
           Zaloguj się
         </button>
@@ -31,7 +12,4 @@
     </mat-card-content>
   </mat-card>
 </main>
- <!-- <div class="form-content">
-        <app-form-input type="email" label="Email" [control]="emailControl" placeholder="Email" [submitted] =formSubitted ></app-form-input>
-        <app-form-input type="password" label="Haslo" [control]="passwordControl" size="large" [submitted] =formSubitted placeholder="Haslo"></app-form-input>
-        </div> -->
+
