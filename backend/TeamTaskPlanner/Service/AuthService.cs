@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,13 @@ using TeamTaskPlanner.Dto;
 using TeamTaskPlanner.Model;
 
 namespace TeamTaskPlanner.Service;
+
+public class LoginResult
+{
+  public string AccessToken { get; set; } = string.Empty;
+  public string RefreshToken { get; set; } = string.Empty;
+  public string Email { get; set; } = string.Empty;
+}
 
 public class AuthService
 {
@@ -50,7 +58,7 @@ public class AuthService
     return true;
   }
 
-  internal async Task<string?> LoginAsync(LoginUserDto dto)
+  internal async Task<LoginResult?> LoginAsync(LoginUserDto dto)
   {
     var user = await db.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == dto.Email);
     if (user == null)
@@ -63,7 +71,20 @@ public class AuthService
     {
       return null;
     }
-    return GenerateJwtToken(user);
+    var accessToken = GenerateJwtToken(user);
+    var refreshToken = GenerateRefreshToken();
+    
+    // Zapisz refresh token w bazie danych
+    user.RefreshToken = refreshToken;
+    user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
+    await db.SaveChangesAsync();
+    
+    return new LoginResult 
+    { 
+      AccessToken = accessToken ?? string.Empty, 
+      RefreshToken = refreshToken,
+      Email = user.Email 
+    };
   }
 
   private string? GenerateJwtToken(User user)
@@ -77,7 +98,7 @@ public class AuthService
     {
       claims.Add(new Claim(ClaimTypes.Role, user.Role.Name));
     }
-    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]));
+    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"] ?? throw new InvalidOperationException("JWT Secret not configured")));
     var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
     var token = new JwtSecurityToken(
         issuer: configuration["Jwt:Issuer"],
@@ -87,5 +108,52 @@ public class AuthService
         signingCredentials: creds
     );
     return new JwtSecurityTokenHandler().WriteToken(token);
+  }
+  
+  private string GenerateRefreshToken()
+  {
+    using (var rng = RandomNumberGenerator.Create())
+    {
+      var randomBytes = new byte[64];
+      rng.GetBytes(randomBytes);
+      return Convert.ToBase64String(randomBytes);
+    }
+  }
+  
+  public async Task<LoginResult?> RefreshTokenAsync(string refreshToken)
+  {
+    var user = await db.Users.Include(u => u.Role)
+        .FirstOrDefaultAsync(u => u.RefreshToken == refreshToken && u.RefreshTokenExpiry > DateTime.UtcNow);
+        
+    if (user == null)
+    {
+      return null;
+    }
+    
+    var newAccessToken = GenerateJwtToken(user);
+    var newRefreshToken = GenerateRefreshToken();
+    
+    user.RefreshToken = newRefreshToken;
+    user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
+    
+    await db.SaveChangesAsync();
+    
+    return new LoginResult
+    {
+      AccessToken = newAccessToken ?? string.Empty,
+      RefreshToken = newRefreshToken,
+      Email = user.Email
+    };
+  }
+  
+  public async Task RevokeRefreshTokenAsync(string refreshToken)
+  {
+    var user = await db.Users.FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
+    if (user != null)
+    {
+      user.RefreshToken = null;
+      user.RefreshTokenExpiry = null;
+      await db.SaveChangesAsync();
+    }
   }
 }
