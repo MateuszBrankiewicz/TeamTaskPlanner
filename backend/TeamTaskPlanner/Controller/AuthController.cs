@@ -54,24 +54,24 @@ public class AuthController : ControllerBase
     });
     return Ok(new { email = result.Email });
   }
-  
+
   [HttpPost("refresh-token")]
-  public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenDto? dto = null)
+  public async Task<IActionResult> RefreshToken()
   {
     // Pobierz refresh token z body lub z ciasteczka
-    var refreshToken = dto?.RefreshToken ?? Request.Cookies["refreshToken"];
-    
+    var refreshToken = Request.Cookies["refreshToken"];
+    Console.WriteLine(refreshToken);
     if (string.IsNullOrEmpty(refreshToken))
     {
       return BadRequest("Refresh token is required");
     }
-    
+
     var result = await _authService.RefreshTokenAsync(refreshToken);
     if (result == null)
     {
       return Unauthorized("Invalid or expired refresh token");
     }
-    
+
     Response.Cookies.Append("token", result.AccessToken, new CookieOptions
     {
       HttpOnly = true,
@@ -86,23 +86,23 @@ public class AuthController : ControllerBase
       SameSite = SameSiteMode.Strict,
       Expires = DateTimeOffset.UtcNow.AddDays(7)
     });
-    
+
     return Ok(new { email = result.Email });
   }
-  
+
   [HttpPost("logout")]
   public async Task<IActionResult> Logout()
   {
     var refreshToken = Request.Cookies["refreshToken"];
-    
+
     if (!string.IsNullOrEmpty(refreshToken))
     {
       await _authService.RevokeRefreshTokenAsync(refreshToken);
     }
-    
+
     Response.Cookies.Delete("token");
     Response.Cookies.Delete("refreshToken");
-    
+
     return Ok(new { message = "Logged out successfully" });
   }
 }

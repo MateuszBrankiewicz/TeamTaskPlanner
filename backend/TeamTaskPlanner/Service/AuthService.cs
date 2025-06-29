@@ -39,10 +39,22 @@ public class AuthService
     {
       return false;
     }
-    var role = await db.Roles.FirstOrDefaultAsync(r => r.Name == "User");
+
+    // Determine role based on email domain or if it's the first user
+    string roleName = "User";
+    if (dto.Email.Contains("admin@") || dto.Email.StartsWith("admin"))
+    {
+      roleName = "Admin";
+    }
+    else if (dto.Email.Contains("manager@") || dto.Email.StartsWith("manager"))
+    {
+      roleName = "Manager";
+    }
+
+    var role = await db.Roles.FirstOrDefaultAsync(r => r.Name == roleName);
     if (role == null)
     {
-      role = new Role { Name = "User" };
+      role = new Role { Name = roleName };
       db.Roles.Add(role);
       await db.SaveChangesAsync();
     }
@@ -73,17 +85,17 @@ public class AuthService
     }
     var accessToken = GenerateJwtToken(user);
     var refreshToken = GenerateRefreshToken();
-    
+
     // Zapisz refresh token w bazie danych
     user.RefreshToken = refreshToken;
     user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
     await db.SaveChangesAsync();
-    
-    return new LoginResult 
-    { 
-      AccessToken = accessToken ?? string.Empty, 
+
+    return new LoginResult
+    {
+      AccessToken = accessToken ?? string.Empty,
       RefreshToken = refreshToken,
-      Email = user.Email 
+      Email = user.Email
     };
   }
 
@@ -109,7 +121,7 @@ public class AuthService
     );
     return new JwtSecurityTokenHandler().WriteToken(token);
   }
-  
+
   private string GenerateRefreshToken()
   {
     using (var rng = RandomNumberGenerator.Create())
@@ -119,25 +131,25 @@ public class AuthService
       return Convert.ToBase64String(randomBytes);
     }
   }
-  
+
   public async Task<LoginResult?> RefreshTokenAsync(string refreshToken)
   {
     var user = await db.Users.Include(u => u.Role)
         .FirstOrDefaultAsync(u => u.RefreshToken == refreshToken && u.RefreshTokenExpiry > DateTime.UtcNow);
-        
+
     if (user == null)
     {
       return null;
     }
-    
+
     var newAccessToken = GenerateJwtToken(user);
     var newRefreshToken = GenerateRefreshToken();
-    
+
     user.RefreshToken = newRefreshToken;
     user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
-    
+
     await db.SaveChangesAsync();
-    
+
     return new LoginResult
     {
       AccessToken = newAccessToken ?? string.Empty,
@@ -145,7 +157,7 @@ public class AuthService
       Email = user.Email
     };
   }
-  
+
   public async Task RevokeRefreshTokenAsync(string refreshToken)
   {
     var user = await db.Users.FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
