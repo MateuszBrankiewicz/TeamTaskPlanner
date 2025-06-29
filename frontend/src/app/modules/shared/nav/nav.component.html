@@ -1,10 +1,10 @@
 <mat-sidenav-container autosize class="drawer">
       <mat-sidenav #sidenav class="side-nav" mode="side" [opened]="matDrawer()">
         <div class="nav-content">
-          <p>Size nav shows</p>
+          <a [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >Register Page</a>
         </div>
 
-        <div class="Footer">
+        <div class="footer">
           <app-theme-toggle/>
           <div class="user-section">
             <span>Mateusz Brankiewicz</span>

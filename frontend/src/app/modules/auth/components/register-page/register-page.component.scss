@@ -3,6 +3,7 @@ main {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  min-width: 100vw;
   padding: 1rem;
   background: linear-gradient(135deg, var(--bg-100) 0%, var(--bg-200) 100%);
 
