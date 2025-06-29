@@ -10,7 +10,7 @@ interface User {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class LoginServiceService {
   private httpClient = inject(HttpClient);
   constructor() { }
   registerUser(user : User){

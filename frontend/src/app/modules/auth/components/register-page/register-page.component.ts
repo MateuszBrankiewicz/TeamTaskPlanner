@@ -3,7 +3,7 @@ import {FormInputComponent} from '../../../shared/form-input/form-input.componen
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
-import {AuthServiceService} from '../../service/auth-service.service';
+import {LoginServiceService} from '../../service/login-service.service';
 import { firstValueFrom } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 
@@ -20,7 +20,7 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './register-page.component.scss'
 })
 export class RegisterPageComponent {
-  constructor(  private authService : AuthServiceService, private router: Router) {
+  constructor(  private authService : LoginServiceService, private router: Router) {
   }
   registerForm: FormGroup = new FormGroup({
     email : new FormControl('', [Validators.required, Validators.email]),

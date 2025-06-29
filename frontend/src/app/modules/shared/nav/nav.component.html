@@ -7,7 +7,13 @@
         <div class="footer">
           <app-theme-toggle/>
           <div class="user-section">
+            @if(this.authService.authUser().isLoggedIn){
             <span>Mateusz Brankiewicz</span>
+            }
+            @else{
+              <a [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >Zaloguj się</a>
+
+            }
           </div>
         </div>
 

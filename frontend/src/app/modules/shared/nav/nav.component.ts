@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ThemeToggleComponent } from "../theme-toggle/theme-toggle.component";
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,6 +12,7 @@ import { RouterModule } from '@angular/router';
 })
 export class NavComponent {
   matDrawer = signal(false);
+  authService = inject(AuthService);
   changeButton(){
     this.matDrawer.set(!this.matDrawer());
   }
