@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ButtonComponent} from './button/button.component';
+// import {ButtonComponent} from './button/button.component';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
+import { NavComponent } from './nav/nav.component';
 
 
 
@@ -9,9 +10,9 @@ import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
   declarations: [],
   imports: [
     CommonModule,
-    ButtonComponent,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    NavComponent
   ],
-  exports: [ButtonComponent,ThemeToggleComponent]
+  exports: [ThemeToggleComponent, NavComponent]
 })
 export class SharedModule { }

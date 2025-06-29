@@ -1,7 +1,7 @@
 
  <mat-form-field class="input-field" [class]="size">
           <mat-label>{{label}}</mat-label>
-          <input [type]="type" matInput [formControl]="control" placeholder="placeholder">
+          <input [type]="type" matInput [formControl]="control">
           @if (control.hasError('email') && !control.hasError('required')){
               <mat-error>Podaj poprawny adres email.</mat-error>
           }

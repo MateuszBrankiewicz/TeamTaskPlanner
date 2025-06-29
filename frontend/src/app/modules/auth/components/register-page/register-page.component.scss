@@ -1,34 +1,163 @@
-@use "variables";
-@use "mixins";
-.form-content{
-  max-width: 400px;
-  width: 100%;
-  @include mixins.flex-column-center;
-  background-color: variables.$bg-300;
-  padding: 3rem;
-  border-radius: 2rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-main{
-  @include mixins.flex-center;
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--bg-100) 0%, var(--bg-200) 100%);
+
+  .dark-theme & {
+    background: linear-gradient(135deg, var(--bg-100) 0%, var(--bg-200) 100%);
+  }
 }
 
-h2{
-  font-size: 2rem;
-  color: variables.$text-100
+mat-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 3rem 2.5rem;
+  border-radius: 16px;
+  background: var(--bg-100);
+  border: 1px solid var(--bg-300);
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
+  .dark-theme & {
+    box-shadow:
+      0 10px 25px -5px rgba(0, 0, 0, 0.4),
+      0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    border-color: var(--bg-200);
+  }
+
+  // Animacja pojawienia się
+  animation: slideUp 0.5s ease-out;
 }
-form{
-  @include mixins.flex-column-center
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-a{
-  text-decoration: none;
-  color: variables.$primary-100;
+
+mat-card-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  h2 {
+    color: var(--text-100);
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-100), var(--accent-100));
+      border-radius: 2px;
+    }
+  }
 }
-.link-to-login{
-  color: variables.$text-100;
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
-.error-message{
-  color: variables.$text-error;
+
+
+
+// Przycisk submit - nowoczesny design
+button[type="submit"] {
+  margin-top: 1.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary-100), var(--primary-200));
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background: var(--bg-300);
+    color: var(--text-200);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+
+    &::before {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+
+  mat-card {
+    padding: 2rem 1.5rem;
+    max-width: none;
+    width: calc(100% - 2rem);
+  }
+
+  mat-card-header h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  mat-card {
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+  }
+
+  mat-card-header {
+    margin-bottom: 2rem;
+  }
+
+  form {
+    gap: 1.5rem;
+  }
 }

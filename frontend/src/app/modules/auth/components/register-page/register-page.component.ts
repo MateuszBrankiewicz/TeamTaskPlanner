@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
 import {FormInputComponent} from '../../../shared/form-input/form-input.component';
-import {ButtonComponent} from '../../../shared/button/button.component';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import {AuthServiceService} from '../../service/auth-service.service';
 import { firstValueFrom } from 'rxjs';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-register-page',
   imports: [
     FormInputComponent,
-    ButtonComponent,
+
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    MatCardModule
   ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss'

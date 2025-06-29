@@ -1,0 +1,27 @@
+<mat-sidenav-container autosize class="drawer">
+      <mat-sidenav #sidenav class="side-nav" mode="side" [opened]="matDrawer()">
+        <div class="nav-content">
+          <p>Size nav shows</p>
+        </div>
+
+        <div class="Footer">
+          <app-theme-toggle/>
+          <div class="user-section">
+            <span>Mateusz Brankiewicz</span>
+          </div>
+        </div>
+
+        <button type="button" class="disable-button" matButton (click)="sidenav.toggle(); changeButton()">
+          ×
+        </button>
+      </mat-sidenav>
+
+      <mat-sidenav-content>
+        @if(!matDrawer()){
+          <button type="button" class="enable-button" matButton (click)="sidenav.toggle(); changeButton()">
+            >>
+          </button>
+        }
+      </mat-sidenav-content>
+
+</mat-sidenav-container>

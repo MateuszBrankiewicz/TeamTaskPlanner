@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {ButtonComponent} from '../../../shared/button/button.component';
 import {FormInputComponent} from '../../../shared/form-input/form-input.component';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
@@ -25,29 +24,30 @@ export class LoginPageComponent {
   }
   formSubitted = false;
   showError = false;
- async  handleLogin() {
-    this.formSubitted = true;
-    if(this.loginForm.valid)
-    {
-      if(this.loginForm.value.email && this.loginForm.value.password) {
-        const email = this.loginForm.value.email;
-        const password = this.loginForm.value.password;
-        try{
-          const response = firstValueFrom(
-            this.authService.loginUser({email,password})
-          )
-          console.log(response);
-          await this.router.navigate(['/'])
-        }
-        catch(err){
-          this.showError = true;
-          console.log(err);
-        }
+ async handleLogin() {
+  this.formSubitted = true;
+  if(this.loginForm.valid) {
+    if(this.loginForm.value.email && this.loginForm.value.password) {
+      const email = this.loginForm.value.email;
+      const password = this.loginForm.value.password;
+      try {
+        const response = await firstValueFrom(
+          this.authService.loginUser({email, password})
+        );
+        console.log(response);
+        // ✅ Nawigacja TYLKO gdy login się powiedzie
+        await this.router.navigate(['/']);
       }
-    }else{
-      this.loginForm.markAllAsTouched();
+      catch(err) {
+        this.showError = true;
+        console.log(err);
+        // ✅ Tutaj nie ma nawigacji - zostaniesz na stronie logowania
+      }
     }
+  } else {
+    this.loginForm.markAllAsTouched();
   }
+}
   get emailControl(): FormControl {
     return this.loginForm.get('email') as FormControl;
   }
