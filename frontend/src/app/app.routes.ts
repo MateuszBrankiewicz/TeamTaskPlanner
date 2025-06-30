@@ -9,6 +9,9 @@ export const routes: Routes = [
   ,{
     path: 'auth',
     loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
+  },{
+    path: 'project',
+    loadChildren: () => import('./modules/project-managment/project-managment.module').then((m) => m.ProjectManagmentModule),
   }
 ];
 @NgModule({

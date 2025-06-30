@@ -1,13 +1,52 @@
-.with-navigation{
+@use "variables" as *;
+
+.main-content{
+  height: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
 
 }
-main{
-  width: 100%;
-  border: 1px solid red;
-  height: 100%;
+.card{
+  background-color: var(--bg-200);
+  margin: 4px;
+  width: 90%;
+  padding: 2rem;
+  backdrop-filter: blur(40px);
+}
+.raise-button{
+  background-color: var(--primary-100);
+  border: 0.1rem solid var(--accent-200);
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+.tittle{
+  color: var(--primary-100);
+}
+.low{
+  color: var(--accent-200)
+}
+.medium{
+  color: var(--text-100)
+}
+.high{
+  color: var(--primary-100);
+}
+.critical{
+  color: red;
+}
+@media screen and (min-width: 481px) {
+  .card{
+    width: 45%;
+    margin: 0.5rem;
+  }
+}
+@media screen and (min-width: 761px) {
+  .card{
+    width: 30%;
+    margin: 1rem;
+  }
 }

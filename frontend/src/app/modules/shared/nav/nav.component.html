@@ -2,13 +2,14 @@
       <mat-sidenav #sidenav class="side-nav" mode="side" [opened]="matDrawer()">
         <div class="nav-content">
           <a [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >Register Page</a>
+          <a routerLink="/project/new-project">Utwórz projekt</a>
         </div>
 
         <div class="footer">
           <app-theme-toggle/>
           <div class="user-section">
             @if(this.authService.authUser().isLoggedIn){
-            <span>Mateusz Brankiewicz</span>
+            <span>{{this.authService.authUser().userName}}</span>
             }
             @else{
               <a [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >Zaloguj się</a>

@@ -1,23 +1,26 @@
-<div class="with-navigation">
-  <main>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Title</mat-card-title>
-            <mat-card-subtitle>Subtitle</mat-card-subtitle>
+
+  <main class="main-content">
+    @for(task of tasks(); track task.id){
+    <mat-card class="card">
+        <mat-card-header class="header-card">
+            <mat-card-title class="tittle">{{task.title}}</mat-card-title>
+            <mat-card-subtitle>{{task.dueDate | date:'medium'}}</mat-card-subtitle>
         </mat-card-header>
-        <img matCardImage src="Card wide image source">
+
         <mat-card-content>
-            Text content
+            {{task.description}}
         </mat-card-content>
-        <mat-card-actions align="start">
-            <button mat-button >Action1</button>
+
+        <mat-card-actions align="end">
+            <button mat-button-raised (click)="changeTaskAsDone(task)" class="raise-button">Zrobione</button>
 
         </mat-card-actions>
-        <mat-card-footer>
-            Footer
+        <mat-card-footer [class]="task.priority | lowercase">
+            {{task.priority}}
         </mat-card-footer>
     </mat-card>
+  }
   </main>
-</div>
+
 
 
