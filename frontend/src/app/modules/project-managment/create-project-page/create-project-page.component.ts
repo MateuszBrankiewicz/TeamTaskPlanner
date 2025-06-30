@@ -6,8 +6,6 @@ import { FormInputComponent } from "../../shared/form-input/form-input.component
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectManagmentService } from '../project-managment.service';
-import { takeUntil } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
 
 @Component({
@@ -29,7 +27,7 @@ onSubmit() {
   const name = this.createProjectForm.get('projectName')?.value;
   const description = this.createProjectForm.get('projectDescription')?.value;
   this.projectService.createProject({name:name, description:description}).subscribe({
-    next: (response) => {
+    next: () => {
       const dialogRef = this.dialog.open(DialogComponent, {
         data: {
           title: 'Sukces',

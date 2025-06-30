@@ -1,0 +1,78 @@
+.full-list {
+  height: 100vh;
+  width: 100%;
+  padding: 1rem;
+  background: var(--bg-100);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr 1fr 1fr 1.5fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+
+  // Style nagłówka
+  background: linear-gradient(135deg, var(--primary-100) 0%, var(--primary-200) 100%);
+  color: white;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  // Cień
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  span {
+    text-align: center;
+    padding: 0.5rem;
+  }
+}
+.full-list {
+  .mat-mdc-list-item {
+    height: auto;
+    padding: 0;
+    margin: 0.5rem 0;
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, auto);
+    gap: 0.5rem;
+    text-align: center;
+
+    span {
+      padding: 0.3rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  .full-list {
+    padding: 0.5rem;
+  }
+}
+
+// Animacje dla listy
+.full-list {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Hover efekt dla całego list-item
+mat-list-item:hover {
+  app-single-list-item {
+    transform: scale(1.02);
+  }
+}

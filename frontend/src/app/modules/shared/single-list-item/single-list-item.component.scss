@@ -1,0 +1,148 @@
+.full-item {
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr 1fr 1fr 1.5fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin: 0;
+  padding: 1rem;
+  width: 100%;
+
+  // Tło i kolory
+  background: linear-gradient(135deg, var(--bg-200) 0%, var(--bg-100) 100%);
+  border: 1px solid var(--accent-200);
+  border-radius: 12px;
+
+  // Cień
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+              0 1px 3px rgba(0, 0, 0, 0.08);
+
+  // Animacje
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Hover efekt
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15),
+                0 3px 10px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-100);
+  }
+
+  // Pozycja relative dla pseudoelementu
+  position: relative;
+  overflow: hidden;
+
+  // Kolorowy pasek na górze
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-100), var(--accent-200));
+    border-radius: 12px 12px 0 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+// Style dla poszczególnych sekcji
+.tittle {
+  font-weight: 600;
+  color: var(--primary-100);
+  font-size: 1.1rem;
+}
+
+.description {
+  color: var(--text-100);
+  opacity: 0.8;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.task-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-200);
+  color: white;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+
+  // Różne kolory dla statusów
+  &.active {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+  }
+
+  &.completed {
+    background: rgba(33, 150, 243, 0.1);
+    color: #2196F3;
+    border: 1px solid #2196F3;
+  }
+
+  &.pending {
+    background: rgba(255, 193, 7, 0.1);
+    color: #FFC107;
+    border: 1px solid #FFC107;
+  }
+}
+
+.member-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-100);
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .full-item {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(7, auto);
+    gap: 0.5rem;
+    text-align: center;
+
+    .tittle {
+      font-size: 1.2rem;
+      border-bottom: 1px solid var(--accent-200);
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+// Style dla dat i liczb
+div:nth-child(4), div:nth-child(6) {
+  text-align: center;
+  font-weight: 500;
+  color: var(--text-100);
+
+  span {
+    padding: 0.2rem 0.5rem;
+    background: rgba(var(--accent-200), 0.1);
+    border-radius: 8px;
+    font-size: 0.85rem;
+  }
+}

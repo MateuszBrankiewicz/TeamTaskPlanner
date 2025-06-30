@@ -1,0 +1,34 @@
+@if(error()){
+  <p>Wystapil bład pobierania danych</p>
+}
+@else {
+  <mat-list class="full-list">
+    <div class="header" mat-subheader>
+      <span class="tittle">Nazwa projektu</span>
+      <span class="description">Opis projektu</span>
+      <span class="task-details">Liczba zadan</span>
+      <span>Ukończone zadania</span>
+      <span class="status">Status projektu</span>
+      <span class="member-number">Liczba uczestników</span>
+    </div>
+    <mat-divider/>
+    @for ( project of projects(); track project.id) {
+    <mat-list-item>
+       <app-single-list-item title={{project.name}}
+        description={{project.description}}
+        completedTaskCount={{project.completedTasksCount}}
+        taskCount={{project.tasksCount}}
+        dueDate={{project.dueDate}}
+        priority={{project.status}}
+        numberOfMemebers={{project.members.length}}
+
+       ></app-single-list-item>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    }
+
+  </mat-list>
+
+
+
+}
