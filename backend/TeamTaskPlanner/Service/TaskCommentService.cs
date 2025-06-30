@@ -91,8 +91,8 @@ public class TaskCommentService
       if (comment.Task.ProjectId.HasValue)
       {
         var isProjectLead = await db.ProjectMembers
-            .AnyAsync(pm => pm.ProjectId == comment.Task.ProjectId.Value && 
-                           pm.UserId == userId && 
+            .AnyAsync(pm => pm.ProjectId == comment.Task.ProjectId.Value &&
+                           pm.UserId == userId &&
                            (pm.Role == ProjectRole.Lead || pm.Role == ProjectRole.Manager));
         if (!isProjectLead) return false;
       }

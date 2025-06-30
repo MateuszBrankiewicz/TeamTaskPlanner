@@ -17,7 +17,7 @@ public class TaskCommentDto
   public string Content { get; set; } = string.Empty;
   public DateTime CreatedDate { get; set; }
   public DateTime? UpdatedDate { get; set; }
-  
+
   public UserInfoDto User { get; set; } = null!;
   public int? ParentCommentId { get; set; }
   public List<TaskCommentDto> Replies { get; set; } = new();

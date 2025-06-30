@@ -32,7 +32,7 @@ public class TaskService
       var project = await db.Projects
           .Include(p => p.Members)
           .FirstOrDefaultAsync(p => p.Id == dto.ProjectId.Value);
-          
+
       if (project == null || (!project.Members.Any(m => m.UserId == createdByUserId) && project.CreatedByUserId != createdByUserId))
       {
         return null;
@@ -140,10 +140,10 @@ public class TaskService
     // Aktualizuj pola
     if (!string.IsNullOrEmpty(dto.Title))
       task.Title = dto.Title;
-      
+
     if (!string.IsNullOrEmpty(dto.Description))
       task.Description = dto.Description;
-      
+
     if (dto.Status.HasValue)
     {
       task.Status = (Model.TaskStatus)dto.Status.Value;
@@ -156,13 +156,13 @@ public class TaskService
         task.CompletedDate = null;
       }
     }
-      
+
     if (dto.Priority.HasValue)
       task.Priority = (TaskPriority)dto.Priority.Value;
-      
+
     if (dto.DueDate.HasValue)
       task.DueDate = dto.DueDate.Value;
-      
+
     if (dto.AssignedToUserId.HasValue)
     {
       // Sprawdź czy użytkownik istnieje
@@ -224,8 +224,8 @@ public class TaskService
     if (task.ProjectId.HasValue)
     {
       var isProjectLead = await db.ProjectMembers
-          .AnyAsync(pm => pm.ProjectId == task.ProjectId.Value && 
-                         pm.UserId == userId && 
+          .AnyAsync(pm => pm.ProjectId == task.ProjectId.Value &&
+                         pm.UserId == userId &&
                          (pm.Role == ProjectRole.Lead || pm.Role == ProjectRole.Manager));
       return isProjectLead;
     }

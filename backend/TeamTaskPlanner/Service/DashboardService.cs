@@ -24,7 +24,7 @@ public class DashboardService
     await System.Threading.Tasks.Task.Delay(50);
     return GenerateRandomTasks();
   }
-  
+
   public async System.Threading.Tasks.Task<UserStats> GetUserStatsAsync(int userId)
   {
     await System.Threading.Tasks.Task.Delay(30);
