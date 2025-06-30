@@ -1,1 +1,34 @@
-<p>create-project-page works!</p>
+<div class="main-content">
+  <mat-card class="add-project-form">
+    <mat-card-header>
+      <mat-card-title class="tittle">Dodaj nowy projekt</mat-card-title>
+      @if(showError()){
+        <mat-card-subtitle class="error">Wystapil nieoczekiwany błąd</mat-card-subtitle>
+      }
+    </mat-card-header>
+
+    <mat-card-content>
+      <form
+        #projectForm="ngForm"
+        [formGroup]="createProjectForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <app-form-input
+          label="Podaj nazwe projektu"
+          type="text"
+          [control]="ProjectName"
+        ></app-form-input>
+        <app-form-input
+          type="text"
+          label="Podaj krótki opis projektu"
+          [control]="ProjectDescription"
+        ></app-form-input>
+        <button class="sumbit" mat-button-raised color="primary" class="button">
+          Dodaj projekt
+        </button>
+      </form>
+    </mat-card-content>
+
+    <mat-card-footer> </mat-card-footer>
+  </mat-card>
+</div>
