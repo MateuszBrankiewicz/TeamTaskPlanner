@@ -158,7 +158,7 @@ public class AuthService
     };
   }
 
-  public async Task RevokeRefreshTokenAsync(string refreshToken)
+  public async System.Threading.Tasks.Task RevokeRefreshTokenAsync(string refreshToken)
   {
     var user = await db.Users.FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
     if (user != null)

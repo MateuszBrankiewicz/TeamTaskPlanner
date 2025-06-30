@@ -4,10 +4,10 @@ namespace TeamTaskPlanner.Service;
 
 public class DashboardService
 {
-  public async Task<DashboardData> GetDashboardDataAsync(int userId)
+  public async System.Threading.Tasks.Task<DashboardData> GetDashboardDataAsync(int userId)
   {
     // Symulacja pobierania danych - zwracamy przykładowe dane
-    await Task.Delay(100); // Symulacja opóźnienia bazy danych
+    await System.Threading.Tasks.Task.Delay(100); // Symulacja opóźnienia bazy danych
 
     return new DashboardData
     {
@@ -19,16 +19,15 @@ public class DashboardService
       LastLoginDate = DateTime.UtcNow.AddDays(-Random.Shared.Next(0, 7))
     };
   }
-
-  public async Task<List<TaskSummary>> GetUserTasksAsync(int userId)
+  public async System.Threading.Tasks.Task<List<TaskSummary>> GetUserTasksAsync(int userId)
   {
-    await Task.Delay(50);
+    await System.Threading.Tasks.Task.Delay(50);
     return GenerateRandomTasks();
   }
-
-  public async Task<UserStats> GetUserStatsAsync(int userId)
+  
+  public async System.Threading.Tasks.Task<UserStats> GetUserStatsAsync(int userId)
   {
-    await Task.Delay(30);
+    await System.Threading.Tasks.Task.Delay(30);
 
     return new UserStats
     {

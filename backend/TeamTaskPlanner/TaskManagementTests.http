@@ -1,0 +1,115 @@
+### Task Management API Tests
+
+### 1. Register and Login first
+POST http://localhost:5078/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "User123!"
+}
+
+### Login
+POST http://localhost:5078/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "User123!"
+}
+
+### 2. Create a project first
+POST http://localhost:5078/api/project
+Content-Type: application/json
+
+{
+  "name": "Website Redesign",
+  "description": "Complete redesign of the company website",
+  "dueDate": "2025-08-01T00:00:00Z"
+}
+
+### 3. Create tasks
+POST http://localhost:5078/api/task
+Content-Type: application/json
+
+{
+  "title": "Design new homepage",
+  "description": "Create mockups and wireframes for the new homepage layout",
+  "priority": 2,
+  "dueDate": "2025-07-15T00:00:00Z",
+  "projectId": 1
+}
+
+### Create another task
+POST http://localhost:5078/api/task
+Content-Type: application/json
+
+{
+  "title": "Implement user authentication",
+  "description": "Add login and registration functionality",
+  "priority": 3,
+  "dueDate": "2025-07-20T00:00:00Z"
+}
+
+### 4. Get all user tasks
+GET http://localhost:5078/api/task
+
+### Get tasks by status
+GET http://localhost:5078/api/task?status=Todo
+
+### Get tasks by project
+GET http://localhost:5078/api/task?projectId=1
+
+### 5. Get specific task with details
+GET http://localhost:5078/api/task/1
+
+### 6. Update task status
+PUT http://localhost:5078/api/task/1
+Content-Type: application/json
+
+{
+  "status": 1,
+  "title": "Design new homepage - Updated"
+}
+
+### 7. Add comment to task
+POST http://localhost:5078/api/task/1/comments
+Content-Type: application/json
+
+{
+  "content": "Started working on the wireframes. Will have initial designs ready by tomorrow."
+}
+
+### 8. Add reply to comment
+POST http://localhost:5078/api/task/1/comments
+Content-Type: application/json
+
+{
+  "content": "Great! Looking forward to seeing the designs.",
+  "parentCommentId": 1
+}
+
+### 9. Get task comments
+GET http://localhost:5078/api/task/1/comments
+
+### 10. Update comment
+PUT http://localhost:5078/api/task/comments/1
+Content-Type: application/json
+
+{
+  "content": "Started working on the wireframes. Will have initial designs ready by tomorrow. Updated: First draft is complete!"
+}
+
+### 11. Complete task
+PUT http://localhost:5078/api/task/1
+Content-Type: application/json
+
+{
+  "status": 3
+}
+
+### 12. Delete comment (optional)
+DELETE http://localhost:5078/api/task/comments/2
+
+### 13. Delete task (only creator can do this)
+DELETE http://localhost:5078/api/task/2

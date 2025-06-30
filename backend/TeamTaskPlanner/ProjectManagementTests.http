@@ -1,0 +1,118 @@
+### Project Management API Tests
+
+### 1. Login first
+POST http://localhost:5078/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "User123!"
+}
+
+### 2. Create projects
+POST http://localhost:5078/api/project
+Content-Type: application/json
+
+{
+  "name": "Mobile App Development",
+  "description": "Develop a mobile app for task management",
+  "dueDate": "2025-12-01T00:00:00Z"
+}
+
+### Create another project
+POST http://localhost:5078/api/project
+Content-Type: application/json
+
+{
+  "name": "Database Migration",
+  "description": "Migrate from SQL Server to PostgreSQL",
+  "dueDate": "2025-09-15T00:00:00Z"
+}
+
+### 3. Get all user projects
+GET http://localhost:5078/api/project
+
+### 4. Get specific project
+GET http://localhost:5078/api/project/1
+
+### 5. Update project
+PUT http://localhost:5078/api/project/1
+Content-Type: application/json
+
+{
+  "name": "Mobile App Development - Phase 1",
+  "description": "Develop a mobile app for task management - starting with MVP",
+  "status": 0
+}
+
+### 6. Register another user to test project members
+POST http://localhost:5078/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "developer@example.com",
+  "password": "Dev123!"
+}
+
+### 7. Add member to project (need to login as project creator first)
+POST http://localhost:5078/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "User123!"
+}
+
+### Add the developer to project
+POST http://localhost:5078/api/project/1/members
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "role": 0
+}
+
+### 8. Get project members
+GET http://localhost:5078/api/project/1/members
+
+### 9. Login as developer and check access
+POST http://localhost:5078/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "developer@example.com",
+  "password": "Dev123!"
+}
+
+### Developer should now see the project
+GET http://localhost:5078/api/project
+
+### Developer can access project details
+GET http://localhost:5078/api/project/1
+
+### 10. Create task in project as developer
+POST http://localhost:5078/api/task
+Content-Type: application/json
+
+{
+  "title": "Setup development environment",
+  "description": "Configure React Native development environment",
+  "priority": 1,
+  "dueDate": "2025-07-05T00:00:00Z",
+  "projectId": 1
+}
+
+### 11. Login back as project owner to remove member
+POST http://localhost:5078/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "User123!"
+}
+
+### Remove member from project
+DELETE http://localhost:5078/api/project/1/members/1
+
+### 12. Delete project (only creator can do this)
+DELETE http://localhost:5078/api/project/2
